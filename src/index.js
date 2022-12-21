@@ -48,7 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
         img.addEventListener('click', () => {
             imageClicked(ramen);
         })
-            //append the image to ramenMenu
+        // This deals with the case where there is no image
+        img.addEventListener('error', (e) => {
+            e.target.src = "https://curriculum-content.s3.amazonaws.com/phase-1/phase-1-mock-cc-ramen-rater/demo-gif.gif"
+            e.onerror = null;
+        })
+        //append the image to ramenMenu
         ramenMenu.appendChild(img);
     }
     function imageClicked(ramen) {
@@ -57,6 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
         ramenMenuRest.innerHTML = ramen.restaurant;
         ramenMenuRating.innerHTML = ramen.rating;
         ramenMenuComment.innerHTML = ramen.comment;
+        // This deals with the case where there is no image
+        ramenMenuImage.addEventListener('error', (e) => {
+            e.target.src = "https://curriculum-content.s3.amazonaws.com/phase-1/phase-1-mock-cc-ramen-rater/demo-gif.gif"
+            e.onerror = null;
+        })
     }
 
     // Deal with the form meow
@@ -81,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
             addRamenToNav(res)
             imageClicked(res)
         })
+        newRamenForm.reset();
     }
     getAllData();
     setFirstImage()
