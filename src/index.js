@@ -22,6 +22,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const newRating = document.querySelector('#new-rating');
     const newComment = document.querySelector('#new-comment');
 
+    //Delete Button
+    const deleteButton = document.querySelector('h4');
+    deleteButton.innerHTML = "Delete Current Ramen";
+    deleteButton.addEventListener('click', (e) => {
+        console.log(myCurrentRamen);
+        fetch(`${url}/${myCurrentRamen.id}`, {
+            method: 'DELETE',
+            body: JSON.stringify(myCurrentRamen),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            // Get image assocaited with current ramen
+            // remove that <img> from the DOM
+        })
+    })
+
     function getAllData() {
         fetch(url)
         .then((response) => response.json())
@@ -37,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then((response) => response.json())
         .then((data) => {
             imageClicked(data[0])
+            myCurrentRamen = data[0]
         })
     }
 
@@ -67,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.target.src = "https://curriculum-content.s3.amazonaws.com/phase-1/phase-1-mock-cc-ramen-rater/demo-gif.gif"
             e.onerror = null;
         })
+        myCurrentRamen = ramen;
     }
 
     // Deal with the form meow
@@ -92,6 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
             imageClicked(res)
         })
         newRamenForm.reset();
+    }
+
+    function addDeleteButton() {
+        
     }
     getAllData();
     setFirstImage()
