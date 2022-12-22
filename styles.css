@@ -88,6 +88,9 @@ input[type="submit"] {
   cursor: pointer;
   transition: all 0.3s;
 }
+#deleteButton {
+  cursor: pointer;
+}
 
 input[type="submit"]:active {
   background-color: gray;
